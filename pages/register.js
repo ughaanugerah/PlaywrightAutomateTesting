@@ -5,6 +5,7 @@ exports.RegisterPage = class RegisterPage {
 
         this.page = page
         this.expect = expect
+
         this.input_FirstName = page.getByLabel('First Name')
         this.input_LastName = page.getByLabel('Last Name')
         this.input_Email = page.getByLabel('Email', { exact: true })
@@ -14,7 +15,7 @@ exports.RegisterPage = class RegisterPage {
     }
 
     async gotoRegisterURL() {
-        await this.page.goto('https://magento.softwaretestingboard.com/');
+        await this.page.goto('/');
         await this.page.getByRole('link', { name: 'Create an Account' }).click();
         await this.expect(this.page).toHaveURL('https://magento.softwaretestingboard.com/customer/account/create/')
     }

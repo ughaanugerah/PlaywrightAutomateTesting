@@ -14,14 +14,20 @@ exports.NavbarPage = class Navbar {
 }
 
 exports.ItemCardpage = class ItemCard{
-    constructor(page) {
-        this.page = page
+    constructor(page, expect) {
+        this.page = page;
+        this.expect = expect;
     }
 
-    async SelectItem(Item){
+    async ViewDetailCard(Item){
         await this.page.locator("//li[@class='item product product-item']//a[contains(text(), '" + Item + "')]").click();
-        await this.page.getByLabel('M', { exact: true }).click();
-        await this.page.getByLabel('Blue').click();
-        await this.page.getByRole('button', { name: 'Add to Cart' }).click();    
     }
+
+    async AddToCartFromCard(Item, Size, Color){
+        await this.page.locator('li').filter({ hasText: Item }).getByLabel(Size).click();
+        await this.page.locator('li').filter({ hasText: Item }).getByLabel(Color).click();
+        await this.page.locator('li').filter({ hasText: Item }).locator('button').click();
+        await this.expect(this.page.locator('form').filter({ hasText: 'Added' })).toBeVisible();
+    }
+
 }

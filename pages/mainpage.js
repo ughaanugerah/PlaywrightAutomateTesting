@@ -17,6 +17,8 @@ exports.ItemCardpage = class ItemCard{
     constructor(page, expect) {
         this.page = page;
         this.expect = expect;
+
+        
     }
 
     async ViewDetailCard(Item){
@@ -29,5 +31,7 @@ exports.ItemCardpage = class ItemCard{
         await this.page.locator('li').filter({ hasText: Item }).locator('button').click();
         await this.expect(this.page.locator('form').filter({ hasText: 'Added' })).toBeVisible();
     }
+
+
 
 }
